@@ -144,7 +144,7 @@ Promise.all([OWIDData, Producto6Data, Producto7Data, Producto14Data]).then(
 
     xslx.utils.book_append_sheet(wb, xslx.utils.json_to_sheet(regionesClean), "Regiones");
 
-    const comunas = CasosConfirmadosNacionales.map((v) => ({
+    const comunas = uniqBy(CasosConfirmadosNacionales, (v) => v["Comuna ID"]).map((v) => ({
       codigo: toInteger(v["Comuna ID"]),
       nombre: v.Comuna,
       poblacion: toInteger(v.Poblacion),

@@ -6,10 +6,10 @@ import xslx from "xlsx";
 
 const toDate = (date: string) => date.replace(/-/g, "/");
 
-const readCSVFile = <T>(file: fs.PathLike): Promise<T[]> => {
+const readCSVFile = <T>(file: string): Promise<T[]> => {
   return new Promise<T[]>((resolve, reject) => {
     const results: T[] = [];
-    fs.createReadStream(file)
+    fs.createReadStream(path.resolve(process.cwd(), file))
       .pipe(csv())
       .on("data", (data) => results.push(data))
       .on("end", () => resolve(results))
@@ -331,7 +331,7 @@ export async function getData() {
     "Nuevos Casos Internacional"
   );
 
-  const newExcelLocation = path.resolve("./tables/data.xlsx");
+  const newExcelLocation = path.resolve(process.cwd(), "./tables/data.xlsx");
 
   try {
     xslx.writeFile(wb, newExcelLocation);

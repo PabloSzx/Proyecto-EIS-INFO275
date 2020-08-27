@@ -168,7 +168,7 @@ async function getIndicadores() {
     "Tasa Casos Internacional"
   );
 
-  const newExcelLocation = path.resolve("./tables/indicadores.xlsx");
+  const newExcelLocation = path.resolve(process.cwd(), "./tables/indicadores.xlsx");
 
   try {
     xslx.writeFile(wb, newExcelLocation);
